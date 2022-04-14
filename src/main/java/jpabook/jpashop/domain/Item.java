@@ -1,6 +1,7 @@
 package jpabook.jpashop.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Item {
@@ -15,6 +16,8 @@ public class Item {
 
     private int stockQuantity;
 
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories;
 
 
 

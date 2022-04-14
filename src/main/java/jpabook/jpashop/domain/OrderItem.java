@@ -1,9 +1,6 @@
 package jpabook.jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class OrderItem {
@@ -12,12 +9,19 @@ public class OrderItem {
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
-    @Column(name = "ORDER_ID")
-    private Long orderId;
-    @Column(name = "ITEM_ID")
-    private Long itemId;
+    // 외래키 값을 그대로 가지는게 아니라 참조를 가지게 된다.
+    @ManyToOne
+    @JoinColumn(name = "ITEM_ID")
+    private Item item;
+
+    // 얘의 반대방향을 만들면 그게 양방향이 되는거고
+    // 여기가 연관관계의 주인이 되는 것이다.
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID")
+    private Order order;
 
     private int orderPrice;
+
     private int count;
 
 
@@ -32,20 +36,20 @@ public class OrderItem {
         this.id = id;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public Item getItem() {
+        return item;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public Long getItemId() {
-        return itemId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public int getOrderPrice() {
