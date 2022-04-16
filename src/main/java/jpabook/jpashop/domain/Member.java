@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Member {
+public class Member extends BaseEntity {
 
     // 관례를 따르고싶으면 따면 되는데
     // 관례:   app - memberId,   db - MEMBER_ID

@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderItem;
@@ -22,17 +23,11 @@ public class JpaMain {
 
         try {
 
-            // 주문을 해야하는 상황이라면
-            Order order = new Order();
-//            order.addOrderItems(new OrderItem());
-            em.persist(order);
+            Book book = new Book();
+            book.setName("JPA 책");
+            book.setAuthor("김영한");
 
-
-            // 만약 양방향 연관관계 orderItems가 없다면,
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrder(order);
-
-            em.persist(orderItem);
+            em.persist(book);
 
             tx.commit();
         } catch (Exception e) {
