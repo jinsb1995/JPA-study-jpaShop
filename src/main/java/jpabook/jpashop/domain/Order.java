@@ -9,20 +9,22 @@ import java.util.List;
 @Table(name = "ORDERS")
 public class Order extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue
     @Column(name = "ORDER_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToOne
+    // order에서 delivery로 갈 떄  한번에 같이 하겠다는 의미이다.
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
 
-    @OneToMany(mappedBy = "order")
+    // order를 생성할 때 orderItem도 자동으로 insert 하겠다는 뜻임
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderDate;
